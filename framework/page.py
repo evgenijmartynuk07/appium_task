@@ -26,5 +26,5 @@ class Page:
         try:
             element.click()
         except WebDriverException as e:
-            raise f'Error: {e}'
+            raise f'Error clicking element: {e}'
 
