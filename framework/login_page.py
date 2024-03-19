@@ -12,3 +12,12 @@ class LoginPage(Page):
         self.find_element(self.PASSWORD_INPUT).send_keys(password)
 
         self.click_element(self.LOGIN_BUTTON)
+
+
+    @property
+    def is_logged_in(self):
+        try:
+            self.find_element(('id', 'id_елементу_після_входу'))
+            return True
+        except NoSuchElementException:
+            return False
