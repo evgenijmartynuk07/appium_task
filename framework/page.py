@@ -9,23 +9,17 @@ class Page:
         self.driver = driver
 
     def find_element(self, locator: tuple):
-
         strategy, value = locator
+        strategy = strategy.lower()
+        supported_strategies = {'id': MobileBy.ID, 'xpath': MobileBy.XPATH}
+        
+        if strategy not in supported_strategies:
+            raise ValueError(f"Unsupported locator strategy: {strategy}. Use: 'id', 'xpath'")
+        
         try:
-            if strategy.lower() == "id":
-                element = self.driver.find_element(MobileBy.ID, value)
-            elif strategy.lower() == 'xpath':
-                element = self.driver.find_element(MobileBy.XPATH, value)
-            else:
-                raise ValueError(
-                    f"Unsupported locator strategy: {strategy}. "
-                    f"Use: 'id', 'xpatch'"
-                )
-            return element
+            return self.driver.find_element(supported_strategies[strategy], value)
         except NoSuchElementException:
-            raise ValueError(
-                f"Unsupported value: {value}. Please check!"
-            )
+            raise ValueError(f"Unsupported value: {value}. Please check!")
 
     @staticmethod
     def click_element(element):
