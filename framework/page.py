@@ -20,7 +20,7 @@ class Page:
 
         if strategy not in supported_strategies:
             raise ValueError(
-                f"Unsupported locator strategy: {strategy}. Use: 'id', 'xpath'"
+                f'Unsupported locator strategy: {strategy}. Use: "id", "xpath"'
             )
         try:
             element = WebDriverWait(self.driver, timeout=10).until(
@@ -61,6 +61,6 @@ class Page:
         if element:
             self.click_element(element)
 
-    def check_current_element(self, element):
+    def check_displayed_element(self, element):
         element = self.find_element(element)
         return element.is_displayed()
