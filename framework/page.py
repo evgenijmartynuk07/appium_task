@@ -22,7 +22,6 @@ class Page:
             raise ValueError(
                 f"Unsupported locator strategy: {strategy}. Use: 'id', 'xpath'"
             )
-            #return None
         
         try:
             element = WebDriverWait(self.driver, timeout=10).until(
@@ -35,6 +34,7 @@ class Page:
             raise ValueError(
                 f"Unsupported value: {value} or {strategy}. Please check!"
             )
+            #return None
 
     def clear_element(self, element):
         try:
