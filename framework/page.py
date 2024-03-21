@@ -22,6 +22,7 @@ class Page:
             raise ValueError(
                 f"Unsupported locator strategy: {strategy}. Use: 'id', 'xpath'"
             )
+            #return None
         
         try:
             element = WebDriverWait(self.driver, timeout=10).until(
