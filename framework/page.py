@@ -31,10 +31,10 @@ class Page:
             )
             return element
         except TimeoutException:
-            raise ValueError(
-                f"Unsupported value: {value} or {strategy}. Please check!"
-            )
-            #return None
+            # raise ValueError(
+            #     f"Unsupported value: {value} or {strategy}. Please check!"
+            # )
+            return None
 
     def clear_element(self, element):
         try:
