@@ -1,23 +1,35 @@
 from .page import Page
+from framework.search.locators import Locator
 
 
 class LoginPage(Page):
-    EMAIL_INPUT = ('id', 'com.ajaxsystems:id/authLoginEmail')
-    PASSWORD_INPUT = ('id', 'com.ajaxsystems:id/authLoginPassword')
-    LOGIN_BUTTON = ('id', 'com.ajaxsystems:id/authLogin')
 
     def login(self, username, password):
-        self.find_element(self.EMAIL_INPUT).send_keys(username)
 
-        self.find_element(self.PASSWORD_INPUT).send_keys(password)
+        self._find_and_click_element(Locator.LOGIN_BUTTON)
 
-        self.click_element(self.LOGIN_BUTTON)
+        username_input = self._find_element(Locator.USERNAME_INPUT)
+        self._clear_element(username_input)
+        self._send_keys_to_element(username_input, username)
 
+        password_input = self._find_element(Locator.PASSWORD_INPUT)
+        self._clear_element(password_input)
+        self._send_keys_to_element(password_input, password)
 
-    @property
+        self._find_and_click_element(Locator.SUBMIT_BUTTON)
+
+    def logout(self):
+        self._find_and_click_element(Locator.SIDEBAR_BUTTON)
+
+        self._find_and_click_element(Locator.SETTINGS_BUTTON)
+
+        self._find_and_click_element(Locator.LOGOUT_BUTTON)
+
     def is_logged_in(self):
         try:
-            self.find_element(('id', 'id_елементу_після_входу'))
-            return True
-        except NoSuchElementException:
+            element = self._find_element(Locator.SIDEBAR_BUTTON)
+            if element:
+                return True
+            return False
+        except ValueError:
             return False
