@@ -28,8 +28,6 @@ class LoginPage(Page):
     def is_logged_in(self):
         try:
             element = self.find_element(Locator.SIDEBAR_BUTTON)
-            if element:
-                return True
-            return False
+            return bool(element)
         except ValueError:
             return False
